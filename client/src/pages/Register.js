@@ -7,7 +7,9 @@ class Register extends Component {
     super(props);
     this.state = {
       username: "",
-      pwd: ""
+      email: "",
+      password: "",
+      passwordMatch: ""
     };
     this.onChange = this.onChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -17,7 +19,7 @@ class Register extends Component {
     event.preventDefault();
     const data = {
       username: this.state.username,
-      pwd: this.state.pwd
+      pwd: this.state.password
     };
 
     //Log Input Data
@@ -56,12 +58,27 @@ class Register extends Component {
             placeholder="Username"
             name="username"
           />
+          <label>Email</label>
+          <input
+            onChange={this.onChange}
+            value={this.state.email}
+            placeholder="Email"
+            name="email"
+            type="email"
+          />
           <label>Password</label>
           <input
             type="password"
             onChange={this.onChange}
             value={this.state.pwd}
-            name="pwd"
+            name="password"
+          />
+          <label>Re-Enter Password</label>
+          <input
+            type="password"
+            onChange={this.onChange}
+            value={this.state.passwordMatch}
+            name="passwordMatch"
           />
           <div>
             <button>Submit</button>
