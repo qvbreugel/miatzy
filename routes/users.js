@@ -2,6 +2,8 @@ var express = require("express");
 var router = express.Router();
 var mysql = require("mysql");
 var expressValidator = require("express-validator");
+var bcrypt = require("bcrypt");
+const saltRounds = 10;
 
 const pool = mysql.createPool({
   connectionLimit: 10,
@@ -46,18 +48,22 @@ router.post("/new", function(req, res, next) {
     //Render Error
   } else {
     const username = req.body.username;
-    const password = req.body.pwd;
+    const email = req.body.email;
+    const password = req.body.password;
     const connection = getConnection();
 
-    const queryString = "INSERT INTO users (username, password) VALUES (?,?)";
+    const queryString =
+      "INSERT INTO users (username, email, password) VALUES (?,?, ?)";
 
-    connection.query(queryString, [username, password], function(
-      error,
-      results,
-      fields
-    ) {
-      if (error) throw error;
-      res.send(JSON.stringify(results));
+    bcrypt.hash(password, saltRounds, function(err, hash) {
+      connection.query(queryString, [username, email, hash], function(
+        error,
+        results,
+        fields
+      ) {
+        if (error) throw error;
+        res.send(JSON.stringify(results));
+      });
     });
   }
 });

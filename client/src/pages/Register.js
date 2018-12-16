@@ -19,7 +19,9 @@ class Register extends Component {
     event.preventDefault();
     const data = {
       username: this.state.username,
-      pwd: this.state.password
+      email: this.state.email,
+      password: this.state.password,
+      passwordMatch: this.state.passwordMatch
     };
 
     //Log Input Data
