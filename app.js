@@ -5,6 +5,9 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var expressValidator = require("express-validator");
 
+//Authentication Packages
+var session = require("express-session");
+
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 
@@ -22,6 +25,16 @@ app.use(expressValidator());
 
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+
+app.set("trust proxy", 1); // trust first proxy
+app.use(
+  session({
+    secret: "keyboard cat",
+    resave: false,
+    saveUninitialized: false
+    //cookie: { secure: true }
+  })
+);
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
