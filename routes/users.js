@@ -4,12 +4,16 @@ var mysql = require("mysql");
 var expressValidator = require("express-validator");
 var bcrypt = require("bcrypt");
 const saltRounds = 10;
+var passport = require("passport");
 
+//Mac Connection
 const pool = mysql.createPool({
   connectionLimit: 10,
-  host: "Localhost",
+  host: "127.0.0.1",
   user: "root",
-  database: "miatzy"
+  password: "root",
+  database: "miatzy",
+  port: 8889
 });
 
 function getConnection() {
@@ -53,7 +57,7 @@ router.post("/new", function(req, res, next) {
     const connection = getConnection();
 
     const queryString =
-      "INSERT INTO users (username, email, password) VALUES (?,?, ?)";
+      "INSERT INTO users (username, email, password) VALUES (?,?,?)";
 
     bcrypt.hash(password, saltRounds, function(err, hash) {
       connection.query(queryString, [username, email, hash], function(
@@ -62,15 +66,32 @@ router.post("/new", function(req, res, next) {
         fields
       ) {
         if (error) throw error;
-        res.send(JSON.stringify(results));
+        connection.query(
+          "SELECT `AUTO_INCREMENT` FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'miatzy' AND TABLE_NAME = 'users'",
+          (error, results, fields) => {
+            if (error) throw error;
+            console.log(results);
+            const user_id = results[0];
+            const edit_id = results[0]["AUTO_INCREMENT"];
+            console.log(edit_id);
+
+            console.log(user_id);
+            req.login(user_id, err => {
+              res.send({ Registration: "Succesful" });
+            });
+          }
+        );
       });
     });
   }
 });
 
-/* GET users listing. */
-router.get("/", function(req, res, next) {
-  res.send("respond with a resource");
+passport.serializeUser(function(user_id, done) {
+  done(null, user_id);
+});
+
+passport.deserializeUser(function(user_id, done) {
+  done(null, user_id);
 });
 
 module.exports = router;

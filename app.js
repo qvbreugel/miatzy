@@ -7,6 +7,7 @@ var expressValidator = require("express-validator");
 
 //Authentication Packages
 var session = require("express-session");
+var passport = require("passport");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
@@ -35,6 +36,8 @@ app.use(
     //cookie: { secure: true }
   })
 );
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
