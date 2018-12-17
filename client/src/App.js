@@ -7,6 +7,7 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import AdminDashboard from "./pages/AdminDashboard";
 import NoMatch from "./pages/NoMatch";
+import Logout from "./pages/Logout";
 
 class App extends Component {
   render() {
@@ -19,6 +20,7 @@ class App extends Component {
             <Route path="/login" component={Login} />
             <Route path="/admin" component={AdminDashboard} />
             <Route path="/users" component={Home} />
+            <Route path="/logout" component={Logout} />
             <Route component={NoMatch} />
           </Switch>
         </BrowserRouter>

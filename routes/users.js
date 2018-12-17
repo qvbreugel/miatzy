@@ -107,6 +107,12 @@ router.post(
   })
 );
 
+router.get("/logout", function(req, res) {
+  req.logout();
+  req.session.destroy();
+  res.send({ Logout: "Succesful" });
+});
+
 passport.serializeUser(function(user_id, done) {
   done(null, user_id);
 });

@@ -84,18 +84,18 @@ passport.use(
 
         if (results.length === 0) {
           done(null, false);
+        } else {
+          const hash = results[0].password.toString();
+
+          bcrypt.compare(password, hash, function(err, response) {
+            if (response) {
+              console.log(results[0].id);
+              return done(null, { user_id: results[0].id });
+            } else {
+              return done(null, false);
+            }
+          });
         }
-
-        const hash = results[0].password.toString();
-
-        bcrypt.compare(password, hash, function(err, response) {
-          if (response) {
-            console.log(results[0].id);
-            return done(null, { user_id: results[0].id });
-          } else {
-            return done(null, false);
-          }
-        });
       }
     );
   })
