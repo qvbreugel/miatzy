@@ -3,6 +3,7 @@ var router = express.Router();
 var mysql = require("mysql");
 var expressValidator = require("express-validator");
 var bcrypt = require("bcrypt");
+var passport = require("passport");
 const saltRounds = 10;
 var passport = require("passport");
 
@@ -66,14 +67,13 @@ router.post("/new", function(req, res, next) {
         fields
       ) {
         if (error) throw error;
+
         connection.query(
-          "SELECT `AUTO_INCREMENT` FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'miatzy' AND TABLE_NAME = 'users'",
+          "SELECT LAST_INSERT_ID() as user_id",
           (error, results, fields) => {
             if (error) throw error;
             console.log(results);
             const user_id = results[0];
-            const edit_id = results[0]["AUTO_INCREMENT"];
-            console.log(edit_id);
 
             console.log(user_id);
             req.login(user_id, err => {
