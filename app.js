@@ -4,11 +4,14 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var expressValidator = require("express-validator");
+var mysql = require("mysql");
 
 //Authentication Packages
 var session = require("express-session");
 var passport = require("passport");
+var LocalStrategy = require("passport-local");
 var MySQLStore = require("express-mysql-session");
+var bcrypt = require("bcrypt");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
@@ -52,6 +55,51 @@ app.use(passport.session());
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
+
+//Windows DB Setup
+const pool = mysql.createPool({
+  connectionLimit: 10,
+  host: "localhost",
+  user: "root",
+  database: "miatzy"
+});
+
+function getConnection() {
+  return pool;
+}
+
+passport.use(
+  new LocalStrategy(function(username, password, done) {
+    console.log(username);
+    console.log(password);
+
+    const connection = getConnection();
+    connection.query(
+      "SELECT id, password FROM users WHERE username = ?",
+      [username],
+      function(err, results, fields) {
+        if (err) {
+          done(err);
+        }
+
+        if (results.length === 0) {
+          done(null, false);
+        }
+
+        const hash = results[0].password.toString();
+
+        bcrypt.compare(password, hash, function(err, response) {
+          if (response) {
+            console.log(results[0].id);
+            return done(null, { user_id: results[0].id });
+          } else {
+            return done(null, false);
+          }
+        });
+      }
+    );
+  })
+);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

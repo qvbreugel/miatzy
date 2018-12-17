@@ -99,6 +99,14 @@ router.post("/new", function(req, res, next) {
   }
 });
 
+router.post(
+  "/login",
+  passport.authenticate("local", {
+    successRedirect: "/home",
+    failureRedirect: "/login"
+  })
+);
+
 passport.serializeUser(function(user_id, done) {
   done(null, user_id);
 });
