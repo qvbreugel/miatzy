@@ -7,6 +7,7 @@ var passport = require("passport");
 const saltRounds = 10;
 var passport = require("passport");
 
+/*
 //Mac Connection
 const pool = mysql.createPool({
   connectionLimit: 10,
@@ -15,6 +16,15 @@ const pool = mysql.createPool({
   password: "root",
   database: "miatzy",
   port: 8889
+});
+*/
+
+//Windows Connection
+const pool = mysql.createPool({
+  connectionLimit: 10,
+  host: "localhost",
+  user: "root",
+  database: "miatzy"
 });
 
 function getConnection() {
@@ -68,11 +78,14 @@ router.post("/new", function(req, res, next) {
       ) {
         if (error) throw error;
 
+        const retrieveUserIdQuery =
+          "SELECT id AS user_id FROM users WHERE username = ?";
         connection.query(
-          "SELECT LAST_INSERT_ID() as user_id",
+          retrieveUserIdQuery,
+          [username],
           (error, results, fields) => {
             if (error) throw error;
-            console.log(results);
+
             const user_id = results[0];
 
             console.log(user_id);

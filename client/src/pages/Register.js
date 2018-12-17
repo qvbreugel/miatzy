@@ -9,7 +9,8 @@ class Register extends Component {
       username: "",
       email: "",
       password: "",
-      passwordMatch: ""
+      passwordMatch: "",
+      registration: "In Progress"
     };
     this.onChange = this.onChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -24,8 +25,7 @@ class Register extends Component {
       passwordMatch: this.state.passwordMatch
     };
 
-    //Log Input Data
-    console.log(data);
+    console.log("Handling");
 
     fetch("/users/new", {
       method: "POST",
@@ -37,6 +37,11 @@ class Register extends Component {
           throw new Error("Bad response from server");
         }
         return response.json();
+      })
+      .then(function(response) {
+        console.log(response["Registration"]);
+        const res = response["Registration"];
+        this.setState({ registration: res });
       })
       .catch(function(err) {
         console.log(err);
@@ -86,6 +91,7 @@ class Register extends Component {
             <button>Submit</button>
           </div>
         </form>
+        <p>{this.state.registration}</p>
       </div>
     );
   }

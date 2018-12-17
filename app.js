@@ -8,6 +8,7 @@ var expressValidator = require("express-validator");
 //Authentication Packages
 var session = require("express-session");
 var passport = require("passport");
+var MySQLStore = require("express-mysql-session");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
@@ -27,11 +28,21 @@ app.use(expressValidator());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
+//Windows Options
+var options = {
+  host: "localhost",
+  user: "root",
+  database: "miatzy"
+};
+
+var sessionStore = new MySQLStore(options);
+
 app.set("trust proxy", 1); // trust first proxy
 app.use(
   session({
     secret: "keyboard cat",
     resave: false,
+    store: sessionStore,
     saveUninitialized: false
     //cookie: { secure: true }
   })
