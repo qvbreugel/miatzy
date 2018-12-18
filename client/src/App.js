@@ -7,6 +7,7 @@ import Register from "./pages/Register";
 import Login from "./pages/Login/Login";
 import Products from "./pages/Products/Products";
 import AmountRegistration from "./pages/Products/AmountRegistration";
+import ProductRegistration from "./pages/Products/ProductRegistration";
 import NoMatch from "./pages/NoMatch";
 import Logout from "./pages/Logout";
 
@@ -24,6 +25,11 @@ class App extends Component {
               path="/products/registration"
               exact
               component={AmountRegistration}
+            />
+            <Route
+              path="/products/registration/amount/:amountOfProducts"
+              exact
+              component={ProductRegistration}
             />
             <Route path="/users" component={Home} />
             <Route path="/logout" component={Logout} />

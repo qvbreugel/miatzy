@@ -10,7 +10,7 @@ class Header extends Component {
   }
   componentDidMount() {
     const context = this;
-    fetch("isloggedin", {
+    fetch("/isloggedin", {
       method: "GET"
     })
       .then(function(response) {
