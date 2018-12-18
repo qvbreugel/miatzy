@@ -61,7 +61,7 @@ app.use(function(req, res, next) {
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
-app.use("/products", usersRouter);
+app.use("/products", productsRouter);
 
 //Windows DB Setup
 const pool = mysql.createPool({
