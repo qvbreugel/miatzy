@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 
-import Header from "../components/Header";
+import Header from "../components/Header/Header";
 
 class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
       username: "",
-      password: ""
+      password: "",
+      loginStatus: false
     };
     this.onChange = this.onChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -19,6 +20,8 @@ class Login extends Component {
       username: this.state.username,
       password: this.state.password
     };
+
+    const context = this;
 
     console.log("Handling");
 
@@ -32,6 +35,10 @@ class Login extends Component {
           throw new Error("Bad response from server");
         }
         return response.json();
+      })
+      .then(function(response) {
+        context.setState = { loginStatus: response };
+        console.log(context.state.loginStatus);
       })
       .catch(function(err) {
         console.log(err);

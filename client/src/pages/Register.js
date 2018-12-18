@@ -1,6 +1,7 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 
-import Header from "../components/Header";
+import Header from "../components/Header/Header";
 
 class Register extends Component {
   constructor(props) {
@@ -18,6 +19,9 @@ class Register extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
+
+    const context = this;
+
     const data = {
       username: this.state.username,
       email: this.state.email,
@@ -41,7 +45,7 @@ class Register extends Component {
       .then(function(response) {
         console.log(response["Registration"]);
         const res = response["Registration"];
-        this.setState({ registration: res });
+        context.setState({ registration: res });
       })
       .catch(function(err) {
         console.log(err);
@@ -91,7 +95,13 @@ class Register extends Component {
             <button>Submit</button>
           </div>
         </form>
-        <p>{this.state.registration}</p>
+        <p>
+          {this.state.registration === "Succesful" ? (
+            <Redirect to="/" />
+          ) : (
+            "..."
+          )}
+        </p>
       </div>
     );
   }

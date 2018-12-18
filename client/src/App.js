@@ -5,7 +5,7 @@ import "./App.css";
 import Home from "./pages/Home";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
-import AdminDashboard from "./pages/AdminDashboard";
+import Products from "./pages/Products/Products";
 import NoMatch from "./pages/NoMatch";
 import Logout from "./pages/Logout";
 
@@ -18,7 +18,7 @@ class App extends Component {
             <Route path="/" exact component={Home} />
             <Route path="/register" component={Register} />
             <Route path="/login" component={Login} />
-            <Route path="/admin" component={AdminDashboard} />
+            <Route path="/products" component={Products} />
             <Route path="/users" component={Home} />
             <Route path="/logout" component={Logout} />
             <Route component={NoMatch} />

@@ -99,13 +99,9 @@ router.post("/new", function(req, res, next) {
   }
 });
 
-router.post(
-  "/login",
-  passport.authenticate("local", {
-    successRedirect: "/home",
-    failureRedirect: "/login"
-  })
-);
+router.post("/login", passport.authenticate("local"), (req, res) => {
+  return res.send(true);
+});
 
 router.get("/logout", function(req, res) {
   req.logout();
