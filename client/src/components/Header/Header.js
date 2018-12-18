@@ -7,9 +7,8 @@ class Header extends Component {
   constructor(props) {
     super(props);
     this.state = { isLoggedIn: false };
-    //this.componentWillMount = this.componentWillMount.bind(this);
   }
-  componentWillMount() {
+  componentDidMount() {
     const context = this;
     fetch("isloggedin", {
       method: "GET"
@@ -22,7 +21,6 @@ class Header extends Component {
       })
       .then(function(response) {
         context.setState({ isLoggedIn: response });
-        console.log(this.state.isLoggedIn);
       })
       .catch(function(err) {
         console.log(err);

@@ -4,7 +4,7 @@ import "./App.css";
 
 import Home from "./pages/Home";
 import Register from "./pages/Register";
-import Login from "./pages/Login";
+import Login from "./pages/Login/Login";
 import Products from "./pages/Products/Products";
 import NoMatch from "./pages/NoMatch";
 import Logout from "./pages/Logout";

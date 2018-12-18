@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import NotLoggedIn from "../../components/NotLoggedIn";
-import ProductRegistration from "../Products/ProductRegistration";
+import Header from "../../components/Header/Header";
 
 class Products extends Component {
   constructor(props) {
@@ -28,10 +28,31 @@ class Products extends Component {
         console.log(err);
       });
   }
+
+  handleSubmit() {
+    const amountOfItems = this.state.amountOfProducts;
+  }
   render() {
     return (
       <div>
-        {this.state.isLoggedIn ? <ProductRegistration /> : <NotLoggedIn />}{" "}
+        {this.state.isLoggedIn ? (
+          <div>
+            <Header />
+            <h1>Register your products here!</h1>
+            <form onSubmit={this.handleSubmit}>
+              <label>Enter the amount of products you wish to hand in</label>
+              <input
+                onChange={this.onChange}
+                value={this.state.amountOfProducts}
+                placeholder="Enter Amount"
+                name="productAmount"
+              />
+            </form>
+            <button>Enter</button>
+          </div>
+        ) : (
+          <NotLoggedIn />
+        )}{" "}
       </div>
     );
   }

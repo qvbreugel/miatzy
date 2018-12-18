@@ -1,6 +1,7 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 
-import Header from "../components/Header/Header";
+import Header from "../../components/Header/Header";
 
 class Login extends Component {
   constructor(props) {
@@ -37,8 +38,7 @@ class Login extends Component {
         return response.json();
       })
       .then(function(response) {
-        context.setState = { loginStatus: response };
-        console.log(context.state.loginStatus);
+        context.setState({ loginStatus: response });
       })
       .catch(function(err) {
         console.log(err);
@@ -53,26 +53,33 @@ class Login extends Component {
     return (
       <div>
         <Header />
-        <h1>Login Here!</h1>
-        <form onSubmit={this.handleSubmit} method="POST">
-          <label>Username</label>
-          <input
-            onChange={this.onChange}
-            value={this.state.username}
-            placeholder="Username"
-            name="username"
-          />
-          <label>Password</label>
-          <input
-            type="password"
-            onChange={this.onChange}
-            value={this.state.pwd}
-            name="password"
-          />
+        {this.state.loginStatus ? (
+          <Redirect to="/" />
+        ) : (
           <div>
-            <button>Submit</button>
+            {" "}
+            <h1>Login Here!</h1>
+            <form onSubmit={this.handleSubmit} method="POST">
+              <label>Username</label>
+              <input
+                onChange={this.onChange}
+                value={this.state.username}
+                placeholder="Username"
+                name="username"
+              />
+              <label>Password</label>
+              <input
+                type="password"
+                onChange={this.onChange}
+                value={this.state.pwd}
+                name="password"
+              />
+              <div>
+                <button>Submit</button>
+              </div>
+            </form>
           </div>
-        </form>
+        )}
       </div>
     );
   }
