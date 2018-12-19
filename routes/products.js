@@ -28,7 +28,7 @@ router.post("/new", function(req, res, next) {
   const connection = getConnection();
 
   const queryString =
-    "INSERT INTO products (ticketnumber, product_id, name, price, category) VALUES (?,?,?,?,?)";
+    "INSERT INTO products (ticketnumber, product_id, name, price, category, sold, available) VALUES (?,?,?,?,?,'false','no')";
 
   connection.query(
     queryString,
