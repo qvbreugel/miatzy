@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
 
 import NotLoggedIn from "../../components/NotLoggedIn";
+import RegistrationForm from ".//RegistrationForm";
 
 class Products extends Component {
   constructor(props) {
@@ -32,11 +32,7 @@ class Products extends Component {
   render() {
     return (
       <div>
-        {this.state.isLoggedIn ? (
-          <Redirect to="/products/registration" />
-        ) : (
-          <NotLoggedIn />
-        )}
+        {this.state.isLoggedIn ? <RegistrationForm /> : <NotLoggedIn />}
       </div>
     );
   }

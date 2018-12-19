@@ -10,6 +10,8 @@ import AmountRegistration from "./pages/Products/AmountRegistration";
 import ProductRegistration from "./pages/Products/ProductRegistration";
 import NoMatch from "./pages/NoMatch";
 import Logout from "./pages/Logout";
+import Profile from "./pages/Profile/Profile";
+import TicketNumber from "./pages/Profile/TicketNumber";
 
 class App extends Component {
   render() {
@@ -33,6 +35,8 @@ class App extends Component {
             />
             <Route path="/users" component={Home} />
             <Route path="/logout" component={Logout} />
+            <Route path="/profile" component={Profile} />
+            <Route path="/changeticketnumber" component={TicketNumber} />
             <Route component={NoMatch} />
           </Switch>
         </BrowserRouter>

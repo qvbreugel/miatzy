@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 class RegistrationForm extends Component {
   constructor(props) {
@@ -55,6 +56,8 @@ class RegistrationForm extends Component {
   render() {
     return (
       <div>
+        <Link to="/profile">Back to Profile Page</Link>
+        <h1>Register Products</h1>
         <form onSubmit={this.handleSubmit} method="POST">
           <label>Ticket Number</label>
           <input
