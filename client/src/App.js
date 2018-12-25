@@ -12,6 +12,7 @@ import NoMatch from "./pages/NoMatch";
 import Logout from "./pages/Logout";
 import Profile from "./pages/Profile/Profile";
 import TicketNumber from "./pages/Profile/TicketNumber";
+import HPL from "./pages/Home/Homepagelayout";
 
 class App extends Component {
   render() {
@@ -34,6 +35,7 @@ class App extends Component {
               component={ProductRegistration}
             />
             <Route path="/users" component={Home} />
+            <Route path="/hpl" component={HPL} />
             <Route path="/logout" component={Logout} />
             <Route path="/profile" component={Profile} />
             <Route path="/changeticketnumber" component={TicketNumber} />
