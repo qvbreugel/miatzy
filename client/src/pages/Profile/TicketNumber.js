@@ -6,16 +6,37 @@ class Login extends Component {
     super(props);
     this.state = {
       ticketNumber: "",
-      loginStatus: false
+      loginStatus: false,
+      currentTicketNumber: ""
     };
     this.onChange = this.onChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentDidMount() {
+    const context = this;
+    fetch("/currentticketnumber", {
+      method: "GET"
+    })
+      .then(function(response) {
+        if (response.status >= 400) {
+          throw new Error("Bad response from server");
+        }
+        return response.json();
+      })
+      .then(function(response) {
+        const currentTicketNumber = response["ticket_number"];
+        context.setState({ currentTicketNumber: currentTicketNumber });
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
+  }
+
   handleSubmit(event) {
     event.preventDefault();
     const data = {
-      ticketNumber: this.state.username
+      ticketNumber: this.state.ticketNumber
     };
 
     //const context = this;
@@ -49,6 +70,7 @@ class Login extends Component {
         <Link to="/profile">Back to Profile Page</Link>
         <div>
           <h1>Change Ticket Number</h1>
+          <h2>Current Ticket Number: {this.state.currentTicketNumber}</h2>
           <form onSubmit={this.handleSubmit} method="POST">
             <input
               onChange={this.onChange}
