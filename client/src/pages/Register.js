@@ -11,6 +11,7 @@ class Register extends Component {
       email: "",
       password: "",
       passwordMatch: "",
+      ticketNumber: "",
       registration: "In Progress"
     };
     this.onChange = this.onChange.bind(this);
@@ -26,7 +27,8 @@ class Register extends Component {
       username: this.state.username,
       email: this.state.email,
       password: this.state.password,
-      passwordMatch: this.state.passwordMatch
+      passwordMatch: this.state.passwordMatch,
+      ticketNumber: this.state.ticketNumber
     };
 
     console.log("Handling");
@@ -90,6 +92,13 @@ class Register extends Component {
             onChange={this.onChange}
             value={this.state.passwordMatch}
             name="passwordMatch"
+          />
+          <label>Ticket Number</label>
+          <input
+            onChange={this.onChange}
+            value={this.state.ticketNumber}
+            name="ticketNumber"
+            placeholder="Ticket Number"
           />
           <div>
             <button>Submit</button>

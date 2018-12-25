@@ -5,7 +5,6 @@ class RegistrationForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      ticketNumber: "",
       product_id: 1,
       name: "",
       price: "",
@@ -22,7 +21,6 @@ class RegistrationForm extends Component {
     const context = this;
 
     const data = {
-      ticketNumber: this.state.ticketNumber,
       product_id: this.state.product_id,
       name: this.state.name,
       price: this.state.price,
@@ -59,13 +57,6 @@ class RegistrationForm extends Component {
         <Link to="/profile">Back to Profile Page</Link>
         <h1>Register Products</h1>
         <form onSubmit={this.handleSubmit} method="POST">
-          <label>Ticket Number</label>
-          <input
-            onChange={this.onChange}
-            value={this.state.ticketNumber}
-            placeholder="Ticket Number"
-            name="ticketNumber"
-          />
           <label>Item Description</label>
           <input
             onChange={this.onChange}

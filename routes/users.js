@@ -65,36 +65,37 @@ router.post("/new", function(req, res, next) {
     const username = req.body.username;
     const email = req.body.email;
     const password = req.body.password;
+    const ticketNumber = req.body.ticketNumber;
     const connection = getConnection();
 
     const queryString =
-      "INSERT INTO users (username, email, password) VALUES (?,?,?)";
+      "INSERT INTO users (username, email, password, ticket_number) VALUES (?,?,?,?)";
 
     bcrypt.hash(password, saltRounds, function(err, hash) {
-      connection.query(queryString, [username, email, hash], function(
-        error,
-        results,
-        fields
-      ) {
-        if (error) throw error;
+      connection.query(
+        queryString,
+        [username, email, hash, ticketNumber],
+        function(error, results, fields) {
+          if (error) throw error;
 
-        const retrieveUserIdQuery =
-          "SELECT id AS user_id FROM users WHERE username = ?";
-        connection.query(
-          retrieveUserIdQuery,
-          [username],
-          (error, results, fields) => {
-            if (error) throw error;
+          const retrieveUserIdQuery =
+            "SELECT id AS user_id FROM users WHERE username = ?";
+          connection.query(
+            retrieveUserIdQuery,
+            [username],
+            (error, results, fields) => {
+              if (error) throw error;
 
-            const user_id = results[0];
+              const user_id = results[0];
 
-            console.log(user_id);
-            req.login(user_id, err => {
-              res.send({ Registration: "Succesful" });
-            });
-          }
-        );
-      });
+              console.log(user_id);
+              req.login(user_id, err => {
+                res.send({ Registration: "Succesful" });
+              });
+            }
+          );
+        }
+      );
     });
   }
 });
