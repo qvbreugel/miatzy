@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 
-import UserNav from "../Header/UserNav";
-import NoUserNav from "../Header/NoUserNav";
+import User from "./User";
+import NoUser from "./NoUser";
 
-class Header extends Component {
+class Navbar extends Component {
   constructor(props) {
     super(props);
     this.state = { isLoggedIn: false };
@@ -30,13 +30,13 @@ class Header extends Component {
     return (
       <div>
         {this.state.isLoggedIn ? (
-          <UserNav fixed={this.props.fixed} />
+          <User fixed={this.props.fixed} />
         ) : (
-          <NoUserNav fixed={this.props.fixed} />
+          <NoUser fixed={this.props.fixed} />
         )}{" "}
       </div>
     );
   }
 }
 
-export default Header;
+export default Navbar;
