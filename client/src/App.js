@@ -12,6 +12,7 @@ import NoMatch from "./pages/NoMatch";
 import Logout from "./pages/Logout";
 import Profile from "./pages/Profile/Profile";
 import TicketNumber from "./pages/Profile/TicketNumber";
+import ViewProducts from "./pages/Products/ViewProducts";
 //import Test from "./pages/Login/LoginLayout";
 
 class App extends Component {
@@ -29,6 +30,7 @@ class App extends Component {
               exact
               component={AmountRegistration}
             />
+            <Route path="/products/view" exact component={ViewProducts} />
             <Route
               path="/products/registration/amount/:amountOfProducts"
               exact

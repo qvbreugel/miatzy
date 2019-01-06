@@ -13,6 +13,9 @@ const Profile = () => {
       <Link to="/products">
         <h2>Register Products</h2>
       </Link>
+      <Link to="/products/view">
+        <h2>View Products</h2>
+      </Link>
     </div>
   );
 };
