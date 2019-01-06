@@ -12,6 +12,7 @@ import NoMatch from "./pages/NoMatch";
 import Logout from "./pages/Logout";
 import Profile from "./pages/Profile/Profile";
 import TicketNumber from "./pages/Profile/TicketNumber";
+//import Test from "./pages/Login/LoginLayout";
 
 class App extends Component {
   render() {

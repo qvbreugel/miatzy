@@ -7,7 +7,8 @@ import User from "../../components/Navbars/User";
 import NoUser from "../../components/Navbars/NoUser";
 
 HomepageHeading.propTypes = {
-  mobile: PropTypes.bool
+  mobile: PropTypes.bool,
+  isLoggedIn: PropTypes.bool
 };
 
 class DesktopContainer extends Component {
@@ -62,7 +63,8 @@ class DesktopContainer extends Component {
             >
               {isLoggedIn ? <User fixed={fixed} /> : <NoUser fixed={fixed} />}
             </Menu>
-            <HomepageHeading />
+            {console.log(isLoggedIn)}
+            <HomepageHeading isLoggedIn={isLoggedIn} />
           </Segment>
         </Visibility>
 

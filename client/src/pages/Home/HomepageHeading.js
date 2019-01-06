@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Container, Header, Button } from "semantic-ui-react";
 
-const HomepageHeading = ({ mobile }) => (
+const HomepageHeading = ({ mobile, isLoggedIn }) => (
   <Container text>
     <Header
       as="h1"
@@ -25,9 +25,16 @@ const HomepageHeading = ({ mobile }) => (
         marginTop: mobile ? "0.5em" : "1.5em"
       }}
     />
-    <Button primary size="huge" as={Link} to="/register">
-      Become a Supplier
-    </Button>
+    {console.log(isLoggedIn)}
+    {isLoggedIn ? (
+      <Button color="green" size="huge" as={Link} to="/products">
+        Add Products
+      </Button>
+    ) : (
+      <Button color="green" size="huge" as={Link} to="/register">
+        Become a Supplier
+      </Button>
+    )}
   </Container>
 );
 

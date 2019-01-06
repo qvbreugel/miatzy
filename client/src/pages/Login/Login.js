@@ -1,7 +1,14 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
-
-import Header from "../../components/Header/Header";
+import {
+  Button,
+  Form,
+  Grid,
+  Header,
+  Icon,
+  Message,
+  Segment
+} from "semantic-ui-react";
+import { Link, Redirect } from "react-router-dom";
 
 class Login extends Component {
   constructor(props) {
@@ -48,38 +55,66 @@ class Login extends Component {
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
-
   render() {
     return (
-      <div>
-        <Header />
+      <div className="login-form">
+        {/*
+      Heads up! The styles below are necessary for the correct render of this example.
+      You can do same with CSS, the main idea is that all the elements up to the `Grid`
+      below must have a height of 100%.
+    */}
+        <style>{`
+      body > div,
+      body > div > div,
+      body > div > div > div.login-form {
+        height: 100%;
+      }
+    `}</style>
         {this.state.loginStatus ? (
           <Redirect to="/" />
         ) : (
-          <div>
-            {" "}
-            <h1>Login Here!</h1>
-            <form onSubmit={this.handleSubmit} method="POST">
-              <label>Username</label>
-              <input
-                onChange={this.onChange}
-                value={this.state.username}
-                placeholder="Username"
-                name="username"
-              />
-              <label>Password</label>
-              <input
-                type="password"
-                onChange={this.onChange}
-                value={this.state.pwd}
-                name="password"
-              />
-              <div>
-                <button>Submit</button>
-              </div>
-            </form>
-          </div>
-        )}
+          <Grid
+            textAlign="center"
+            style={{ height: "100%" }}
+            verticalAlign="middle"
+          >
+            <Grid.Column style={{ maxWidth: 450 }}>
+              <Header as="h2" color="green" textAlign="center">
+                <Icon name="handshake" /> Log in as a supplier
+              </Header>
+              <Form size="large" onSubmit={this.handleSubmit} method="POST">
+                <Segment stacked>
+                  <Form.Input
+                    onChange={this.onChange}
+                    value={this.state.username}
+                    name="username"
+                    fluid
+                    icon="user"
+                    iconPosition="left"
+                    placeholder="Username"
+                  />
+                  <Form.Input
+                    onChange={this.onChange}
+                    value={this.state.pwd}
+                    name="password"
+                    fluid
+                    icon="lock"
+                    iconPosition="left"
+                    placeholder="Password"
+                    type="password"
+                  />
+
+                  <Button color="green" fluid size="large">
+                    Login
+                  </Button>
+                </Segment>
+              </Form>
+              <Message>
+                Not a supplier yet? <Link to="/register">Sign Up</Link>
+              </Message>
+            </Grid.Column>
+          </Grid>
+        )}{" "}
       </div>
     );
   }
