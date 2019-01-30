@@ -55,6 +55,7 @@ router.post("/new", function(req, res, next) {
   req
     .checkBody("passwordMatch", "Passwords do not match")
     .equals(req.body.password);
+  req.checkBody("ticketNumber", "Ticket Number cannot be empty").notEmpty();
 
   const errors = req.validationErrors();
 
