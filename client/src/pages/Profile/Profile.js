@@ -16,6 +16,9 @@ const Profile = () => {
       <Link to="/products/view">
         <h2>View Products</h2>
       </Link>
+      <Link to="/products/print">
+        <h2>Print Products</h2>
+      </Link>
     </div>
   );
 };

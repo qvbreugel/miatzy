@@ -5,7 +5,6 @@ class RegistrationForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      product_id: 1,
       name: "",
       price: "",
       category: "",
@@ -21,7 +20,6 @@ class RegistrationForm extends Component {
     const context = this;
 
     const data = {
-      product_id: this.state.product_id,
       name: this.state.name,
       price: this.state.price,
       category: this.state.category

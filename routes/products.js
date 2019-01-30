@@ -48,7 +48,6 @@ router.get("/view", function(req, res, next) {
 router.post("/new", function(req, res, next) {
   const name = req.body.name;
   const price = req.body.price;
-  const product_id = req.body.product_id;
   const category = req.body.category;
   const id = req.session.passport["user"]["user_id"];
 
@@ -62,17 +61,36 @@ router.post("/new", function(req, res, next) {
   ) {
     if (error) throw error;
     const ticketNumber = results[0]["ticket_number"];
-    const queryString =
-      "INSERT INTO products (ticketnumber, product_id, name, price, category, sold, available) VALUES (?,?,?,?,?,'false','no')";
-
-    connection.query(
-      queryString,
-      [ticketNumber, product_id, name, price, category],
-      function(error, results, fields) {
-        if (error) throw error;
-        res.send({ Registration: "Succesful" });
+    const retrievePreviousProductID =
+      "SELECT product_id FROM products WHERE ticketnumber = ?";
+    connection.query(retrievePreviousProductID, [ticketNumber], function(
+      error,
+      results,
+      fields
+    ) {
+      if (error) throw error;
+      //console.log(results);
+      let previousProductID = 0;
+      for (let i = 0; i < results.length; i++) {
+        if (results[i]["product_id"] > previousProductID) {
+          previousProductID = results[i]["product_id"];
+        }
       }
-    );
+      const product_id = previousProductID + 1;
+      console.log(product_id);
+
+      const queryString =
+        "INSERT INTO products (ticketnumber, product_id, name, price, category, sold, available) VALUES (?,?,?,?,?,'false','no')";
+
+      connection.query(
+        queryString,
+        [ticketNumber, product_id, name, price, category],
+        function(error, results, fields) {
+          if (error) throw error;
+          res.send({ Registration: "Succesful" });
+        }
+      );
+    });
   });
 });
 
