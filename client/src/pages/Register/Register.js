@@ -147,6 +147,9 @@ class Register extends Component {
                   </Button>
                 </Segment>
               </Form>
+              <Message>
+                <Link to="/">Back To Home</Link>
+              </Message>
             </Grid.Column>
           </Grid>
         )}{" "}
