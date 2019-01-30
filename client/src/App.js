@@ -13,6 +13,7 @@ import Logout from "./pages/Logout";
 import Profile from "./pages/Profile/Profile";
 import TicketNumber from "./pages/Profile/TicketNumber";
 import ViewProducts from "./pages/Products/ViewProducts";
+import PrintProducts from "./pages/Products/PrintProducts";
 //import Test from "./pages/Login/LoginLayout";
 
 class App extends Component {
@@ -31,6 +32,7 @@ class App extends Component {
               component={AmountRegistration}
             />
             <Route path="/products/view" exact component={ViewProducts} />
+            <Route path="/products/print" exact component={PrintProducts} />
             <Route
               path="/products/registration/amount/:amountOfProducts"
               exact
