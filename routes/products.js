@@ -7,12 +7,25 @@ router.get("/isloggedin", function(req, res, next) {
   res.send(isLoggedIn);
 });
 
+//Mac Connection
+const pool = mysql.createPool({
+  connectionLimit: 10,
+  host: "127.0.0.1",
+  user: "root",
+  password: "root",
+  database: "miatzy",
+  port: 8889
+});
+
+/*
+//Windows Connection
 const pool = mysql.createPool({
   connectionLimit: 10,
   host: "localhost",
   user: "root",
   database: "miatzy"
 });
+*/
 
 function getConnection() {
   return pool;
@@ -33,7 +46,7 @@ router.get("/view", function(req, res, next) {
     if (error) throw error;
     const ticketNumber = results[0]["ticket_number"];
     const queryString =
-      "SELECT name, product_id FROM products WHERE ticketnumber = ?";
+      "SELECT name, product_id, ticketnumber FROM products WHERE ticketnumber = ?";
 
     connection.query(queryString, [ticketNumber], function(
       error,

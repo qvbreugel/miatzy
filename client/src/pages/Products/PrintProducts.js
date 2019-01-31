@@ -57,7 +57,9 @@ class ViewProducts extends Component {
             <div>
               <h2>Your Products:</h2>
               {this.state.products.map(product => (
-                <Barcode value={product.name + "." + product.product_id} />
+                <Barcode
+                  value={product.ticketnumber + "." + product.product_id}
+                />
               ))}
             </div>
           </div>

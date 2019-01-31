@@ -32,11 +32,22 @@ app.use(expressValidator());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
+/*
 //Windows Options
 var options = {
   host: "localhost",
   user: "root",
   database: "miatzy"
+};
+*/
+
+//Mac Options
+var options = {
+  host: "127.0.0.1",
+  user: "root",
+  password: "root",
+  database: "miatzy",
+  port: 8889
 };
 
 var sessionStore = new MySQLStore(options);
@@ -63,12 +74,24 @@ app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/products", productsRouter);
 
+/*
 //Windows DB Setup
 const pool = mysql.createPool({
   connectionLimit: 10,
   host: "localhost",
   user: "root",
   database: "miatzy"
+});
+*/
+
+//Mac DB Setup
+const pool = mysql.createPool({
+  connectionLimit: 10,
+  host: "127.0.0.1",
+  user: "root",
+  password: "root",
+  database: "miatzy",
+  port: 8889
 });
 
 function getConnection() {

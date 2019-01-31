@@ -25,7 +25,6 @@ const HomepageHeading = ({ mobile, isLoggedIn }) => (
         marginTop: mobile ? "0.5em" : "1.5em"
       }}
     />
-    {console.log(isLoggedIn)}
     {isLoggedIn ? (
       <Button color="green" size="huge" as={Link} to="/products">
         Add Products

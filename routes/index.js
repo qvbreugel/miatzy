@@ -3,12 +3,25 @@ var router = express.Router();
 var mysql = require("mysql");
 var passport = require("passport");
 
+//Mac Connection
+const pool = mysql.createPool({
+  connectionLimit: 10,
+  host: "127.0.0.1",
+  user: "root",
+  password: "root",
+  database: "miatzy",
+  port: 8889
+});
+
+/*
+//Windows Connection
 const pool = mysql.createPool({
   connectionLimit: 10,
   host: "localhost",
   user: "root",
   database: "miatzy"
 });
+*/
 
 function getConnection() {
   return pool;

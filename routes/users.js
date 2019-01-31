@@ -7,7 +7,6 @@ var passport = require("passport");
 const saltRounds = 10;
 var passport = require("passport");
 
-/*
 //Mac Connection
 const pool = mysql.createPool({
   connectionLimit: 10,
@@ -17,8 +16,8 @@ const pool = mysql.createPool({
   database: "miatzy",
   port: 8889
 });
-*/
 
+/*
 //Windows Connection
 const pool = mysql.createPool({
   connectionLimit: 10,
@@ -26,6 +25,7 @@ const pool = mysql.createPool({
   user: "root",
   database: "miatzy"
 });
+*/
 
 function getConnection() {
   return pool;
