@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { Grid, Container } from "semantic-ui-react";
 
 import Barcode from "react-barcode";
 
@@ -42,6 +43,7 @@ class ViewProducts extends Component {
       })
       .then(function(response) {
         context.setState({ products: response });
+        window.print();
       })
       .catch(function(err) {
         console.log(err);
@@ -52,17 +54,22 @@ class ViewProducts extends Component {
     return (
       <div>
         {this.state.isLoggedIn ? (
-          <div>
-            <Link to="/profile">Back to Profile Page</Link>
-            <div>
-              <h2>Your Products:</h2>
-              {this.state.products.map(product => (
+          <Grid container columns={2}>
+            {this.state.products.map(product => (
+              <Grid.Column style={{ marginRight: "0.05em" }}>
                 <Barcode
-                  value={product.ticketnumber + "." + product.product_id}
+                  value={
+                    product.ticketnumber +
+                    "." +
+                    product.product_id +
+                    " " +
+                    "EUR" +
+                    product.price
+                  }
                 />
-              ))}
-            </div>
-          </div>
+              </Grid.Column>
+            ))}
+          </Grid>
         ) : (
           <NotLoggedIn />
         )}

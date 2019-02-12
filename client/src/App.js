@@ -5,9 +5,8 @@ import "./App.css";
 import Home from "./pages/Home/Home";
 import Register from "./pages/Register/Register";
 import Login from "./pages/Login/Login";
-import Products from "./pages/Products/Products";
+import RegisterProducts from "./pages/Products/Products";
 import AmountRegistration from "./pages/Products/AmountRegistration";
-import ProductRegistration from "./pages/Products/ProductRegistration";
 import NoMatch from "./pages/NoMatch";
 import Logout from "./pages/Logout";
 import Profile from "./pages/Profile/Profile";
@@ -25,7 +24,11 @@ class App extends Component {
             <Route path="/" exact component={Home} />
             <Route path="/register" component={Register} />
             <Route path="/login" component={Login} />
-            <Route path="/products" exact component={Products} />
+            <Route
+              path="/products/register"
+              exact
+              component={RegisterProducts}
+            />
             <Route
               path="/products/registration"
               exact
@@ -33,11 +36,6 @@ class App extends Component {
             />
             <Route path="/products/view" exact component={ViewProducts} />
             <Route path="/products/print" exact component={PrintProducts} />
-            <Route
-              path="/products/registration/amount/:amountOfProducts"
-              exact
-              component={ProductRegistration}
-            />
             <Route path="/users" component={Home} />
             <Route path="/logout" component={Logout} />
             <Route path="/profile" component={Profile} />

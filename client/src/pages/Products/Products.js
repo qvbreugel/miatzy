@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import NotLoggedIn from "../../components/NotLoggedIn";
-import RegistrationForm from ".//RegistrationForm";
+import RegisterProducts from "./RegisterProducts";
 
 class Products extends Component {
   constructor(props) {
@@ -32,7 +32,7 @@ class Products extends Component {
   render() {
     return (
       <div>
-        {this.state.isLoggedIn ? <RegistrationForm /> : <NotLoggedIn />}
+        {this.state.isLoggedIn ? <RegisterProducts /> : <NotLoggedIn />}
       </div>
     );
   }

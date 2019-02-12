@@ -35,6 +35,7 @@ router.get("/isloggedin", function(req, res, next) {
 router.post("/ticketnumber", function(req, res, next) {
   const connection = getConnection();
   const id = req.session.passport["user"]["user_id"];
+  const ticketNumber = req.body.ticketNumber;
   console.log(ticketNumber);
   const queryString = "UPDATE users SET ticket_number = ? WHERE users.id = ?";
 

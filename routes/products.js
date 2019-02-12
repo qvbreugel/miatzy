@@ -46,7 +46,7 @@ router.get("/view", function(req, res, next) {
     if (error) throw error;
     const ticketNumber = results[0]["ticket_number"];
     const queryString =
-      "SELECT name, product_id, ticketnumber FROM products WHERE ticketnumber = ?";
+      "SELECT name, product_id, ticketnumber, price, category FROM products WHERE ticketnumber = ?";
 
     connection.query(queryString, [ticketNumber], function(
       error,
